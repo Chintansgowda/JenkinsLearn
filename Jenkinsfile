@@ -1,34 +1,36 @@
-pipeline{
+pipeline {
     agent any
 
-    stages('hostname'){
-        steps{
-            sh 'hostname'
+    stages {
+        stage('hostname') {
+            steps {
+                sh 'hostname'
+            }
         }
-    }
-    stages('ip-add'){
-        steps{
-            sh 'hostane -I'
+        stage('ip-add') {
+            steps {
+                sh 'hostname -I'
+            }
         }
-    }
-    stages('cpu-details'){
-        steps{
-            sh 'lscpu'
+        stage('cpu-details') {
+            steps {
+                sh 'lscpu'
+            }
         }
-    }
-    stages(mem-usage){
-        steps{
-            sh 'free -h'
+        stage('mem-usage') {
+            steps {
+                sh 'free -h'
+            }
         }
-    }
-    stages(disk-uasge){
-        steps{
-            sh 'df -h'
+        stage('disk-usage') {
+            steps {
+                sh 'df -h'
+            }
         }
-    }
-    stages('date'){
-        steps{
-            sh 'date'
+        stage('date') {
+            steps {
+                sh 'date'
+            }
         }
     }
 }
