@@ -1,0 +1,52 @@
+pipeline {
+    agent any
+
+    environment {
+        PROJECT_NAME = "MyApp"
+        BUILD_DIR = "build"
+    }
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                git 'https://github.com/octocat/Hello-World.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo "Building ${env.PROJECT_NAME}..."
+                sh 'mkdir -p build && echo "Sample Build Output" > build/output.txt'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo "Running tests..."
+                sh 'echo "All tests passed!"'
+            }
+        }
+
+        stage('Archive Artifacts') {
+            steps {
+                archiveArtifacts artifacts: "${BUILD_DIR}/**", fingerprint: true
+            }
+        }
+
+        stage('Deploy (Mock)') {
+            steps {
+                echo "Deploying ${env.PROJECT_NAME}..."
+                sh 'sleep 2 && echo "Deployed!"'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline completed successfully! ✅'
+        }
+        failure {
+            echo 'Pipeline failed! ❌'
+        }
+    }
+}
