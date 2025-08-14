@@ -37,5 +37,11 @@ pipeline {
                 sh 'date'
             }
         }
+
+        stage("Running Process"){
+            steps {
+                sh 'ps aux'
+            }
+        }    
     }
 }
