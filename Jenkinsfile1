@@ -1,5 +1,5 @@
 pipeline {
-    agent any      #jut to trigger using poll scm jenkins
+    agent any
 
     environment {
         PROJECT_NAME = "MyApp"
