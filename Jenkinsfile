@@ -54,7 +54,7 @@ pipeline {
 
         stage("end"){
             steps {
-                sh '----------succesfully executed via agent node----------------'
+                echo "----------succesfully executed via agent node----------------"
             }
         }
     }
