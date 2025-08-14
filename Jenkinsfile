@@ -51,5 +51,11 @@ pipeline {
                 sh 'ps aux'
             }
         }
+
+        stage("end"){
+            steps {
+                sh '----------succesfully executed via agent node----------------'
+            }
+        }
     }
 }
