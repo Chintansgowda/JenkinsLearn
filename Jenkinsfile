@@ -14,6 +14,12 @@ pipeline {
             }
         }
 
+        stage("Number of cpu's"){
+            steps {
+                sh 'nproc'
+            }
+        }
+
         stage("CPU-Details") {
             steps {
                 sh 'lscpu'
@@ -38,10 +44,10 @@ pipeline {
             }
         }
 
-        stage("Running Process"){
+        stage("Running-process") {
             steps {
                 sh 'ps aux'
             }
-        }    
+        }
     }
 }
