@@ -1,35 +1,38 @@
 pipeline {
-    agent {
-        label 'slave'
-    }
+    agent any
 
     stages {
-        stage('hostname') {
+        stage("Hostname") {
             steps {
                 sh 'hostname'
             }
         }
-        stage('ip-add') {
+
+        stage("IP-adds") {
             steps {
                 sh 'hostname -I'
             }
         }
-        stage('cpu-details') {
+
+        stage("CPU-Details") {
             steps {
                 sh 'lscpu'
             }
         }
-        stage('mem-usage') {
+
+        stage("Mem-usage") {
             steps {
                 sh 'free -h'
             }
         }
-        stage('disk-usage') {
+
+        stage("Disk-Usage") {
             steps {
                 sh 'df -h'
             }
         }
-        stage('date') {
+
+        stage("date") {
             steps {
                 sh 'date'
             }
