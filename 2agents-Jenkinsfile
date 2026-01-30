@@ -13,14 +13,14 @@ pipeline {
             }
         }
 
-        stage('Linux Agent Job') {
-            agent { label 'linux' }
-            steps {
-                echo "Running on Linux agent"
-                sh 'uname -a'
-                sh 'df -h'
-                sh 'free -h'
-            }
-        }
+        // stage('Linux Agent Job') {
+        //     agent { label 'linux' }
+        //     steps {
+        //         echo "Running on Linux agent"
+        //         sh 'uname -a'
+        //         sh 'df -h'
+        //         sh 'free -h'
+        //     }
+        // }
     }
 }
