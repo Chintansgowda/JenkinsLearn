@@ -9,6 +9,7 @@ pipeline {
                 echo "Running on Docker agent"
                 sh 'docker --version'
                 sh 'hostname'
+                sh 'docker images'
             }
         }
 
@@ -18,6 +19,7 @@ pipeline {
                 echo "Running on Linux agent"
                 sh 'uname -a'
                 sh 'df -h'
+                sh 'free -h'
             }
         }
     }
