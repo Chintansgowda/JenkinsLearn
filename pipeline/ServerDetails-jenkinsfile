@@ -2,25 +2,65 @@ pipeline {
     agent any
 
     stages {
+
         stage('User Details') {
             steps {
                 sh '''
+                echo "================ USER DETAILS ================"
+
                 echo "Current logged-in user"
                 whoami
 
                 echo "Current user's full details"
                 id
 
-                echo "Checking ubuntu user (if exists) and listing their details"
+                echo "Groups of current user"
+                groups
+
+                echo "Checking ubuntu user (if exists)"
                 id ubuntu || echo "ubuntu user not found"
 
-                echo "Checking jenkins user (if exists) and listing their details"
+                echo "Checking jenkins user (if exists)"
                 id jenkins || echo "jenkins user not found"
             
-                echo "Checking docker user (if exists) and listing their details"
+                echo "Checking docker user (if exists)"
                 id docker || echo "docker user not found"
+
+                echo "Checking if current user has docker access"
+                groups | grep docker || echo "Current user not in docker group"
                 '''
             }
         }
+
+
+        stage('Server Details') {
+            steps {
+                sh '''
+                echo "================ SERVER DETAILS ================"
+
+                echo "Hostname"
+                hostname
+
+                echo "Public IP"
+                curl -s ipconfig.me || echo "Public IP not available"
+
+                echo "CPU Details"
+                lscpu | grep 'Model name' || echo "CPU info not available"
+
+                echo "Memory Details"
+                free -h
+
+                echo "Disk Usage"
+                df -h
+
+                echo "Uptime"
+                uptime
+
+                echo "Current Date & Time"
+                date
+                '''
+            }
+        }
+
     }
 }
