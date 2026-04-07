@@ -2,95 +2,25 @@ pipeline {
     agent any
 
     stages {
-        stage('Print Server Details') {
+        stage('User Details') {
             steps {
                 sh '''
-                  echo "Hostname:"
-                  hostname
+                echo "Current logged-in user"
+                whoami
 
-                  echo "Current User:"
-                  whoami
+                echo "Current user's full details"
+                id
 
-                  echo "Current Directory:"
-                  pwd
+                echo "Checking ubuntu user (if exists) and listing their details"
+                id ubuntu || echo "ubuntu user not found"
 
-                  echo "OS Details:"
-                  uname -a
-
-                  echo "CPU Info:"
-                  lscpu | head -10
-
-                  echo "Memory Info:"
-                  free -h
-
-                  echo "Disk Usage:"
-                  df -h
+                echo "Checking jenkins user (if exists) and listing their details"
+                id jenkins || echo "jenkins user not found"
+            
+                echo "Checking docker user (if exists) and listing their details"
+                id docker || echo "docker user not found"
                 '''
             }
         }
     }
-
-    post {
-        always {
-            echo "Server details printed successfully."
-        }
-    }
 }
-
-
-//  OR 
-
-// pipeline {
-//     agent any
-
-//     stages {
-
-//         stage('Hostname') {
-//             steps {
-//                 sh 'hostname'
-//             }
-//         }
-
-//         stage('Current User') {
-//             steps {
-//                 sh 'whoami'
-//             }
-//         }
-
-//         stage('Working Directory') {
-//             steps {
-//                 sh 'pwd'
-//             }
-//         }
-
-//         stage('OS Details') {
-//             steps {
-//                 sh 'uname -a'
-//             }
-//         }
-
-//         stage('CPU Info') {
-//             steps {
-//                 sh 'lscpu | head -10'
-//             }
-//         }
-
-//         stage('Memory Info') {
-//             steps {
-//                 sh 'free -h'
-//             }
-//         }
-
-//         stage('Disk Usage') {
-//             steps {
-//                 sh 'df -h'
-//             }
-//         }
-//     }
-
-//     post {
-//         always {
-//             echo "Server details pipeline completed."
-//         }
-//     }
-// }
