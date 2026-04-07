@@ -42,7 +42,7 @@ pipeline {
                 hostname
 
                 echo "Public IP"
-                curl -s ipconfig.me || echo "Public IP not available"
+                curl -s ifconfig.me || echo "Public IP not available"
 
                 echo "CPU Details"
                 lscpu | grep 'Model name' || echo "CPU info not available"
